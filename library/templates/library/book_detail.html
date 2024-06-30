@@ -16,8 +16,7 @@
                             <h5 class="card-title">{{ book.title }}</h5>
                             <p class="card-text"><span class="fw-bold">Author: </span> {{ book.author_name }}</p>
                             <p class="card-text"><span class="fw-bold">Description: </span> {{ book.description }}</p>
-                            <p class="card-text"><span class="fw-bold">Borrowing Price: </span> {{ book.borrowing_price
-                                }}$</p>
+                            <p class="card-text"><span class="fw-bold">Borrowing Price: </span> {{ book.borrowing_price}}$</p>
                             <p class="card-text"><span class="fw-bold">Categories: </span>
                                 {% for category in book.categories.all %}
                                 <span class="badge bg-secondary">{{ category.name }}</span>
@@ -35,8 +34,7 @@
                             {% if user.is_authenticated %}
                             <form method="post" action="{% url 'book_detail' book.id %}">
                                 {% csrf_token %}
-                                <button type="submit" name="borrow" class="btn btn-primary" {% if not book.available
-                                    %}disabled{% endif %}>
+                                <button type="submit" name="borrow" class="btn btn-primary" {% if not book.available %}disabled{% endif %}>
                                     Borrow Book
                                 </button>
                             </form>
