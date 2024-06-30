@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Library Management{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Banner Section -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="display-4">Welcome to Library Management System</h1>
+                <p class="lead">Explore our collection of books and borrow what you like!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category List and Books Section -->
+    <div class="row mt-4">
+        <!-- Categories Sidebar -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Categories</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for category in categories %}
+                        <li class="list-group-item">
+                            <a class='text-decoration-none' href="{% url 'category_books' category.slug %}">{{
+                                category.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Section -->
+        <div class="col-md-9">
+            <div class="row" id="bookList">
+                {% if books %}
+                {% for book in books %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img style='height: 300px;' src="{{ book.image.url }}" class="card-img-top"
+                            alt="{{ book.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <hr>
+                            <p class="card-text"><span class="fw-bold">Author: </span>{{ book.author_name }}</p>
+                            <p class="card-text"><span class="fw-bold">Price: </span> {{ book.borrowing_price }}$</p>
+                            <p class="card-text"><span class="fw-bold">Categories: </span>
+                                {% for category in book.categories.all %}
+                                <span class="badge bg-secondary">{{ category.name }}</span>
+                                {% endfor %}
+                            </p>
+                            <a href="{% url 'book_detail' book.id %}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="col-md-12">
+                    <p>No books found.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function submitCategoryForm() {
+        var form = document.getElementById('categoryFilterForm');
+        form.submit();
+    }
+</script>
+
+{% endblock %}

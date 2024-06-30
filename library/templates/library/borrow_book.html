@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Borrow Book - Library Management{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">Borrow Book</h2>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="card-text">Author: {{ book.author_name }}</p>
+            <p class="card-text">Borrowing Price: {{ book.borrowing_price }}$</p>
+            <p class="card-text">Categories: 
+                {% for category in book.categories.all %}
+                    <span class="badge bg-secondary">{{ category.name }}</span>
+                {% endfor %}
+            </p>
+            <p><strong>Available:</strong> {% if book.available %}Yes{% else %}No{% endif %}</p>
+
+            <form method="post">
+                {% csrf_token %}
+                {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+                <button type="submit" name="borrow" class="btn btn-primary" {% if not book.available %}disabled{% endif %}>
+                    Borrow Book
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Books - Library Management{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-start mt-2 mb-4">Here are All Books!!</h3>
+    <div class="row" id="bookList">
+        {% if books %}
+        {% for book in books %}
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img style='height: 300px;' src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <hr>
+                    <p class="card-text"><span class="fw-bold">Author: </span>{{ book.author_name }}</p>
+                    <p class="card-text"><span class="fw-bold">Price: </span> {{ book.borrowing_price }}$</p>
+                    <p class="card-text"><span class="fw-bold">Categories: </span>
+                        {% for category in book.categories.all %}
+                        <span class="badge bg-secondary"> {{ category.name }}</span>
+                        {% endfor %}
+                    </p>
+                    <a href="{% url 'book_detail' book.id %}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-md-12">
+            <p>No books found.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function submitCategoryForm() {
+        var form = document.getElementById('categoryFilterForm');
+        form.submit();
+    }
+</script>
+
+{% endblock %}

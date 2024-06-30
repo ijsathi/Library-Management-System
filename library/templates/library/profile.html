@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - Library Management{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">Profile</h2>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">User Information</h5>
+            <p class="card-text"><strong>Username:</strong> {{ user.username }}</p>
+            <p class="card-text"><strong>First Name:</strong> {{ user.first_name }}</p>
+            <p class="card-text"><strong>Last Name:</strong> {{ user.last_name }}</p>
+            <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+            <p class="card-text"><strong>Balance:</strong> {{ user.userprofile.balance }}$</p>
+        </div>
+    </div>
+
+    <h2 class="mt-4">Borrowing History</h2>
+    <div class="card mt-4">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Borrowed Date</th>
+                        <th scope="col">Returned Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for borrow in borrows %}
+                    <tr>
+                        <td>{{ borrow.book.title }}</td>
+                        <td>{{ borrow.borrow_date }}</td>
+                        <td>{{ borrow.return_date }}</td>
+                        <td>
+                            {% if not borrow.returned %}
+                            <a href="{% url 'return_book' borrow.id %}" class="btn btn-secondary">Return</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
