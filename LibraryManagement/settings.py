@@ -18,8 +18,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 # ALLOWED_HOSTS=['127.0.0.1', '0.0.0.0']
-CSRF_TRUSTED_ORIGINS = ['https://library-management-system-bzps.onrender.com/,', 'http://*.127.0.0.1']
-
+CORS_ALLOWED_ORIGINS = [
+    "https://library-management-system-bzps.onrender.com",
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'library',
     "crispy_forms",
     "crispy_bootstrap5",
@@ -45,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'LibraryManagement.urls'
