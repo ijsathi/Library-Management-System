@@ -21,7 +21,9 @@ ALLOWED_HOSTS=['127.0.0.1', '0.0.0.0', 'library-management-system-bzps.onrender.
 CORS_ALLOWED_ORIGINS = [
     "https://library-management-system-bzps.onrender.com",
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    "library-management-system-bzps.onrender.com",
+]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
