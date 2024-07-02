@@ -20,8 +20,11 @@ ALLOWED_HOSTS = ["*"]
 # ALLOWED_HOSTS=['127.0.0.1', '0.0.0.0']
 CORS_ALLOWED_ORIGINS = [
     "https://library-management-system-bzps.onrender.com",
-    'http://localhost:3000'
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
 # Application definition
 
 INSTALLED_APPS = [
